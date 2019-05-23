@@ -3,7 +3,7 @@
     "scripts": ["background.js"]
   },
   "browser_action": {
-    "default_icon": "videocam.png",
+    "default_icon": "images/videocam.png",
     "default_title": "録画する"
   },
   "content_scripts": [
@@ -16,7 +16,7 @@
   ],
   "description": "vvv",
   "icons": {
-    "36": "videocam.png"
+    "36": "images/videocam.png"
   },
   "manifest_version": 2,
   "name": "REC!",
@@ -25,5 +25,5 @@
     "tabs",
     "https://www.youtube.com/*"
   ],
-  "version": "1.0.0"
+  "version": "1.0.2"
 }

@@ -1,9 +1,9 @@
 class Recorder {
-  readonly chunks: Blob[]
-  readonly id: string
-  readonly recorder: MediaRecorder
+  private readonly chunks: Blob[]
+  private readonly id: string
+  private readonly recorder: MediaRecorder
 
-  constructor(id: string, player: HTMLVideoElement) {
+  public constructor(id: string, player: HTMLVideoElement) {
     const stream = player.captureStream()
     const recorder = new MediaRecorder(stream)
 
@@ -15,11 +15,19 @@ class Recorder {
     this.recorder = recorder
   }
 
-  handleDataAvailable = (event: BlobEvent) => {
+  public start(): void {
+    this.recorder.start(500)
+  }
+
+  public stop(): void {
+    this.recorder.stop()
+  }
+
+  private handleDataAvailable = (event: BlobEvent): void => {
     this.chunks.push(event.data)
   }
 
-  handleStop = () => {
+  private handleStop = (): void => {
     const blob = new Blob(this.chunks, {
       type: 'video/webm'
     })
@@ -29,34 +37,28 @@ class Recorder {
       url: URL.createObjectURL(blob)
     })
   }
-
-  start() {
-    this.recorder.start(500)
-  }
-
-  stop() {
-    this.recorder.stop()
-  }
 }
 
 let recorder: Recorder | null = null
 
-chrome.runtime.onMessage.addListener(({ command }) => {
-  if (command === 'start') {
-    const id = new URL(location.href).searchParams.get('v')
+chrome.runtime.onMessage.addListener(
+  ({ command }): void => {
+    if (command === 'start') {
+      const id = new URL(location.href).searchParams.get('v')
 
-    if (!id) return
+      if (!id) return
 
-    const player = document.querySelector<HTMLVideoElement>('#player video')
+      const player = document.querySelector<HTMLVideoElement>('#player video, #player-theater-container video')
 
-    if (!player) return
+      if (!player) return
 
-    recorder = new Recorder(id, player)
+      recorder = new Recorder(id, player)
 
-    recorder.start()
-  } else if (command === 'stop' && recorder) {
-    recorder.stop()
-    
-    recorder = null
+      recorder.start()
+    } else if (command === 'stop' && recorder) {
+      recorder.stop()
+
+      recorder = null
+    }
   }
-})
+)

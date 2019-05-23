@@ -8,6 +8,14 @@ interface MediaRecorderEventMap {
 }
 
 interface MediaRecorder extends EventTarget {
-  addEventListener<K extends keyof MediaRecorderEventMap>(type: K, listener: (this: MediaRecorder, ev: MediaRecorderEventMap[K]) => void, options?: boolean | AddEventListenerOptions | undefined): void
-  removeEventListener<K extends keyof MediaRecorderEventMap>(type: K, listener: (this: MediaRecorder, ev: MediaRecorderEventMap[K]) => void, options?: boolean | AddEventListenerOptions | undefined): void
+  addEventListener<K extends keyof MediaRecorderEventMap>(
+    type: K,
+    listener: (this: MediaRecorder, ev: MediaRecorderEventMap[K]) => void,
+    options?: boolean | AddEventListenerOptions | undefined
+  ): void
+  removeEventListener<K extends keyof MediaRecorderEventMap>(
+    type: K,
+    listener: (this: MediaRecorder, ev: MediaRecorderEventMap[K]) => void,
+    options?: boolean | AddEventListenerOptions | undefined
+  ): void
 }
