@@ -1,0 +1,20 @@
+{
+  "dependencies": {},
+  "description": "",
+  "devDependencies": {
+    "@types/chrome": "^0.0.86",
+    "@types/dom-mediacapture-record": "^1.0.1",
+    "rollup": "^1.12.3",
+    "rollup-plugin-copy": "^2.0.1",
+    "rollup-plugin-copy-assets": "^2.0.1",
+    "rollup-plugin-typescript2": "^0.21.1",
+    "typescript": "^3.4.5"
+  },
+  "license": "MIT",
+  "name": "xxx",
+  "private": true,
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "version": "1.0.0"
+}
